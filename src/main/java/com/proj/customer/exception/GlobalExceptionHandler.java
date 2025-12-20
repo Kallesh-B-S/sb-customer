@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,5 +32,20 @@ public class GlobalExceptionHandler {
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error); // 409 Conflict
+    }
+
+    @ExceptionHandler(DataNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleDataNotFound(DataNotFoundException ex) {
+        return buildErrorResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+    }
+
+     // Helper method for consistent error structure
+    private ResponseEntity<Map<String, Object>> buildErrorResponse(HttpStatus status, String message) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", LocalDateTime.now());
+        response.put("status", status.value());
+        response.put("error", status.getReasonPhrase());
+        response.put("message", message);
+        return new ResponseEntity<>(response, status);
     }
 }

@@ -11,19 +11,11 @@ import jakarta.validation.constraints.NotNull;
 @Data
 public class CustomerRegistrationRequest {
 
-    @NotBlank(message = "First name is required")
-    private String firstName;
-
-    @NotBlank(message = "Last name is required")
-    private String lastName;
+    @NotBlank(message = "Full name is required")
+    private String fullName;
 
     @NotNull(message = "Date of birth is required")
     private LocalDate dob;
-
-    @NotBlank(message = "Address line 1 is required")
-    private String addressLine1;
-
-    private String addressLine2; // optional
 
     @NotBlank(message = "City is required")
     private String city;

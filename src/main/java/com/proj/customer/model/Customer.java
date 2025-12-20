@@ -16,20 +16,12 @@ public class Customer {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
+    @Column(name = "customerId")
     private Integer id;
 
-    private String firstName;
-    private String lastName;
+    private String fullName;
 
     private LocalDate dob;
-
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    private String addressLine1;
-
-    private String addressLine2;
 
     private String city;
     private String state;
