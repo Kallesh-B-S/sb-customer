@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.proj.customer.dto.CreateAutomobileRequest;
 import com.proj.customer.dto.CreateUpdateResponse;
 import com.proj.customer.dto.CustomerDetailsResponse;
+import com.proj.customer.model.Automobile;
 import com.proj.customer.model.Customer;
 import com.proj.customer.service.CustomerService;
 import com.proj.customer.util.JwtUtil;
@@ -74,5 +75,11 @@ public class CustomerController {
             @Valid @RequestBody CreateAutomobileRequest requestBody) {
         CreateUpdateResponse response = customerService.createAutomobile(requestBody);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/automobile/{id}")
+    public ResponseEntity<Automobile> getAutomobileById(@Valid @PathVariable("id") Integer automobileId){
+        Automobile response = customerService.getAutomobileById(automobileId);
+        return ResponseEntity.ok(response);
     }
 }

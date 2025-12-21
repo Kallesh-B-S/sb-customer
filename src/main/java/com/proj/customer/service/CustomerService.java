@@ -123,4 +123,9 @@ public class CustomerService {
         return new CustomerDetailsResponse(customer, automobiles);
     }
 
+    public Automobile getAutomobileById(Integer automobileId) {
+        return automobileDao.findById(automobileId)
+                .orElseThrow(() -> new DataNotFoundException("Invalid Automobile ID"));
+    }
+
 }
