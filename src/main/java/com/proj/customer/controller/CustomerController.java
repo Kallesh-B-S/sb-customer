@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.proj.customer.dto.CreateAutomobileRequest;
 import com.proj.customer.dto.CreateUpdateResponse;
 import com.proj.customer.dto.CustomerDetailsResponse;
+import com.proj.customer.dto.CustomerWrapper;
 import com.proj.customer.model.Automobile;
 import com.proj.customer.model.Customer;
 import com.proj.customer.service.CustomerService;
@@ -64,6 +65,12 @@ public class CustomerController {
         return ResponseEntity.ok(customer);
     }
 
+    @GetMapping("/email/{id}")
+    public ResponseEntity<CustomerWrapper> getCustomerByEmail(@PathVariable("id") String email) {
+        CustomerWrapper customer = customerService.getCustomerByEmail(email);
+        return ResponseEntity.ok(customer);
+    }
+
     @GetMapping("/{id}/automobile")
     public ResponseEntity<CustomerDetailsResponse> getCustomerFullDetails(@PathVariable("id") Integer customerId) {
         CustomerDetailsResponse response = customerService.getCustomerFullDetails(customerId);
@@ -78,7 +85,7 @@ public class CustomerController {
     }
 
     @GetMapping("/automobile/{id}")
-    public ResponseEntity<Automobile> getAutomobileById(@Valid @PathVariable("id") Integer automobileId){
+    public ResponseEntity<Automobile> getAutomobileById(@Valid @PathVariable("id") Integer automobileId) {
         Automobile response = customerService.getAutomobileById(automobileId);
         return ResponseEntity.ok(response);
     }

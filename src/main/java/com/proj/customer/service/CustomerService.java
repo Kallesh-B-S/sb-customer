@@ -13,6 +13,7 @@ import com.proj.customer.dto.CreateAutomobileRequest;
 import com.proj.customer.dto.CreateUpdateResponse;
 import com.proj.customer.dto.CustomerDetailsResponse;
 import com.proj.customer.dto.CustomerRegistrationRequest;
+import com.proj.customer.dto.CustomerWrapper;
 import com.proj.customer.dto.LoginRequest;
 import com.proj.customer.dto.LoginResponse;
 import com.proj.customer.dto.SuccessResponseMessage;
@@ -123,9 +124,28 @@ public class CustomerService {
         return new CustomerDetailsResponse(customer, automobiles);
     }
 
-    public Automobile getAutomobileById(Integer automobileId) {
+    public Automobile getAutomobileById(int automobileId) {
         return automobileDao.findById(automobileId)
                 .orElseThrow(() -> new DataNotFoundException("Invalid Automobile ID"));
     }
+
+    public CustomerWrapper getCustomerByEmail(String email) {
+        Customer customer = customerDao.findByEmail(email).orElseThrow(() -> new DataNotFoundException("Invalid Email ID"));
+        return convertCustomerToWrapper(customer);
+    }
+
+    private CustomerWrapper convertCustomerToWrapper(Customer customer) {
+    CustomerWrapper dto = new CustomerWrapper();
+    dto.setId(customer.getId());
+    dto.setFullName(customer.getFullName());
+    dto.setDob(customer.getDob());
+    dto.setCity(customer.getCity());
+    dto.setState(customer.getState());
+    dto.setCountry(customer.getCountry());
+    dto.setZipCode(customer.getZipCode());
+    dto.setEmail(customer.getEmail());
+    dto.setPhone(customer.getPhone());
+    return dto;
+}
 
 }
