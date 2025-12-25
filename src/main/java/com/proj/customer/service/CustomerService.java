@@ -101,6 +101,8 @@ public class CustomerService {
         automobile.setMade(requestBody.getMade());
         automobile.setMake(requestBody.getMade());
         automobile.setYear(requestBody.getYear());
+        automobile.setLicensePlateNumber(requestBody.getLicensePlateNumber());
+        automobile.setVehicleIdentificationNumber(requestBody.getVehicleIdentificationNumber());
         if (requestBody.getPreviousInsurance() != null) {
             automobile.setPreviousInsurance(requestBody.getPreviousInsurance());
         }

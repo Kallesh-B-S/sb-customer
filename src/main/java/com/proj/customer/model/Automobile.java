@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Entity
 public class Automobile {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "automobileID")
@@ -24,6 +24,9 @@ public class Automobile {
     private String made;
 
     private String year;
+
+    private String licensePlateNumber;
+    private String vehicleIdentificationNumber;
 
     @Embedded
     private PreviousInsurance previousInsurance;
